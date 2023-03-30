@@ -8,7 +8,7 @@ if (Directory.Exists(PATH_DICT))
     string? input = Console.ReadLine();
     if (input != null && input.ToLower() == "y")
     {
-        Directory.Delete(PATH_DICT);
+        Directory.Delete(PATH_DICT, true);
         Directory.CreateDirectory(PATH_DICT);
     }
 }
