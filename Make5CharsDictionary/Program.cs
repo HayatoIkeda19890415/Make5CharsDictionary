@@ -1,7 +1,7 @@
 ﻿string PATH_DICT = init_Dictionary();
 Dictionary<char, StreamWriter> dict = new Dictionary<char, StreamWriter>();
 create_Files(PATH_DICT, dict);
-string PATH_INPUT = check_OutPath();
+string PATH_INPUT = check_WordsPath();
 write_Dictinary(dict, PATH_INPUT);
 
 Console.WriteLine("finished.");
@@ -46,7 +46,7 @@ static void create_Files(string PATH_DICT, Dictionary<char, StreamWriter> dict)
     }
 }
 
-static string check_OutPath()
+static string check_WordsPath()
 {
     const string PATH_INPUT = @".\input\words.txt";
     if (!File.Exists(PATH_INPUT))
