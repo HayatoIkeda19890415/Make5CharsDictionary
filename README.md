@@ -1,1 +1,1 @@
-# Make5WordsDictionary
+# Make5CharsDictionary
