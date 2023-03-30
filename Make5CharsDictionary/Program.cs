@@ -16,7 +16,7 @@ else
 {
     Directory.CreateDirectory(PATH_DICT);
 }
-
+Dictionary<char, StreamWriter> dict = new Dictionary<char, StreamWriter>();
 for (char a = 'a'; a <= 'z'; a++)
 {
     string filepath = PATH_DICT + a + ".txt";
@@ -28,7 +28,7 @@ for (char a = 'a'; a <= 'z'; a++)
     }
     else
     {
-        File.Create(PATH_DICT + a + ".txt");
+        dict.Add(a, new StreamWriter(File.Create(PATH_DICT + a + ".txt")));
     }
 }
 
@@ -39,3 +39,31 @@ if (!File.Exists(PATH_INPUT))
     Console.ReadLine();
     Environment.Exit(0);
 }
+
+StreamReader inputReader = new StreamReader(PATH_INPUT);
+while (inputReader.Peek() != -1)
+{
+    string? word = inputReader.ReadLine();
+    if (word == null || word.Length != 5)
+    {
+        continue;
+    }
+    char initial = word.First();
+    if (!System.Text.RegularExpressions.Regex.Match(initial.ToString().ToLower(), @"[a-z]").Success)
+    {
+        continue;
+    }
+    StreamWriter? dictWriter = dict.GetValueOrDefault(initial);
+    if (dictWriter == null)
+    {
+        continue;
+    }
+    dictWriter.WriteLine(word);
+}
+foreach (var item in dict.Values)
+{
+    item.Close();
+}
+
+Console.WriteLine("finished.");
+Console.ReadLine();
